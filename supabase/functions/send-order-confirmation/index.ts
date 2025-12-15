@@ -45,7 +45,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     const paymentMethodLabel = orderData.paymentMethod === 'cash_on_delivery' 
       ? 'الدفع عند الاستلام' 
-      : 'InstaPay';
+      : 'تحويل بنكي';
 
     const itemsHtml = orderData.items.map(item => `
       <tr style="border-bottom: 1px solid #e5e5e5;">
