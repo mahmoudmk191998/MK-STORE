@@ -21,6 +21,7 @@ const statusConfig = {
 
 const paymentMethodLabels = {
   cash_on_delivery: 'الدفع عند الاستلام',
+  bank_transfer: 'تحويل بنكي',
   instapay: 'InstaPay'
 };
 
@@ -203,11 +204,20 @@ const AdminOrders: React.FC = () => {
                       </div>
                     </div>
                     <div>
-                      <h4 className="font-medium mb-2">عنوان الشحن</h4>
+                      <h4 className="font-medium mb-2">معلومات الطلب</h4>
                       <div className="text-sm space-y-1 text-muted-foreground">
-                        <p>{selectedOrder.shipping_address}</p>
-                        <p>{selectedOrder.shipping_city}</p>
+                        <p>طريقة الدفع: {paymentMethodLabels[selectedOrder.payment_method as keyof typeof paymentMethodLabels]}</p>
+                        <p>الحالة: {statusConfig[selectedOrder.status as keyof typeof statusConfig]?.label}</p>
+                        <p>تاريخ الطلب: {new Date(selectedOrder.created_at).toLocaleDateString('ar-EG')}</p>
                       </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h4 className="font-medium mb-2">عنوان الشحن</h4>
+                    <div className="text-sm space-y-1 text-muted-foreground">
+                      <p>{selectedOrder.shipping_address}</p>
+                      <p>{selectedOrder.shipping_city}</p>
                     </div>
                   </div>
 

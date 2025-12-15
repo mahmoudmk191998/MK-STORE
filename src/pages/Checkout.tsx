@@ -28,7 +28,7 @@ const Checkout: React.FC = () => {
     address: '',
     city: '',
     notes: '',
-    paymentMethod: 'cash_on_delivery' as 'instapay' | 'cash_on_delivery'
+    paymentMethod: 'cash_on_delivery' as 'bank_transfer' | 'cash_on_delivery'
   });
 
   const { data: shippingSettings } = useQuery({
@@ -264,12 +264,12 @@ const Checkout: React.FC = () => {
                     </div>
                     
                     <div className="flex items-center space-x-4 space-x-reverse p-4 border border-border rounded-lg cursor-pointer hover:border-accent transition-colors">
-                      <RadioGroupItem value="instapay" id="instapay" />
-                      <Label htmlFor="instapay" className="flex items-center gap-3 cursor-pointer flex-1">
+                      <RadioGroupItem value="bank_transfer" id="bank_transfer" />
+                      <Label htmlFor="bank_transfer" className="flex items-center gap-3 cursor-pointer flex-1">
                         <CreditCard className="h-5 w-5 text-accent" />
                         <div>
-                          <p className="font-medium">InstaPay</p>
-                          <p className="text-sm text-muted-foreground">تحويل فوري عبر InstaPay</p>
+                          <p className="font-medium">تحويل بنكي</p>
+                          <p className="text-sm text-muted-foreground">تحويل فوري عبر البنك أو InstaPay</p>
                         </div>
                       </Label>
                     </div>

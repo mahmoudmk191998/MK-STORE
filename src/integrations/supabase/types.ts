@@ -347,7 +347,7 @@ export type Database = {
         | "shipped"
         | "delivered"
         | "cancelled"
-      payment_method: "instapay" | "cash_on_delivery"
+      payment_method: "instapay" | "cash_on_delivery" | "bank_transfer"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -483,7 +483,7 @@ export const Constants = {
         "delivered",
         "cancelled",
       ],
-      payment_method: ["instapay", "cash_on_delivery"],
+      payment_method: ["instapay", "cash_on_delivery", "bank_transfer"],
     },
   },
 } as const
