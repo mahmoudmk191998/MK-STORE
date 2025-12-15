@@ -27,12 +27,12 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   return (
     <div className="min-h-screen flex bg-muted/30" dir="rtl">
       {/* Desktop sidebar */}
-      <div className="hidden md:block">
+      <div className="hidden lg:block">
         <AdminSidebar />
       </div>
 
       {/* Mobile header */}
-      <div className="w-full md:hidden border-b border-border p-3 flex items-center justify-between">
+      <div className="w-full lg:hidden border-b border-border p-3 flex items-center justify-between">
         <button
           aria-label="فتح القائمة"
           className="p-2"
