@@ -37,18 +37,21 @@ const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <Link to={`/products/${slug}`} className="group block">
-      <div className="bg-card rounded-lg overflow-hidden card-hover border border-border/50">
+      <div className="bg-card rounded-2xl overflow-hidden border border-border/30 shadow-sm hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 hover:-translate-y-2">
         {/* Image Container */}
         <div className="relative aspect-square overflow-hidden bg-muted">
           <img
             src={image || '/placeholder.svg'}
             alt={name}
-            className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500"
+            className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-700"
           />
+          
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           
           {/* Discount Badge */}
           {discount > 0 && (
-            <span className="absolute top-3 right-3 bg-destructive text-destructive-foreground text-xs font-medium px-2 py-1 rounded">
+            <span className="absolute top-3 right-3 bg-gradient-to-r from-destructive to-destructive/80 text-destructive-foreground text-xs font-bold px-3 py-1.5 rounded-full shadow-lg">
               -{discount}%
             </span>
           )}
@@ -56,8 +59,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
           {/* Quick Add Button */}
           <div className="absolute inset-x-0 bottom-0 p-4 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
             <Button 
-              variant="gold" 
-              className="w-full gap-2"
+              variant="default" 
+              className="w-full gap-2 rounded-xl"
               onClick={handleAddToCart}
             >
               <ShoppingBag className="h-4 w-4" />
@@ -67,17 +70,17 @@ const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         {/* Content */}
-        <div className="p-4 space-y-2">
+        <div className="p-5 space-y-3">
           {category && (
-            <p className="text-xs text-muted-foreground uppercase tracking-wider">
+            <span className="inline-block text-xs text-primary font-medium bg-primary/10 px-3 py-1 rounded-full">
               {category}
-            </p>
+            </span>
           )}
-          <h3 className="font-medium text-foreground line-clamp-2 group-hover:text-accent transition-colors">
+          <h3 className="font-display font-semibold text-foreground line-clamp-2 group-hover:text-primary transition-colors">
             {name}
           </h3>
-          <div className="flex items-center gap-2">
-            <span className="text-lg font-semibold text-foreground">
+          <div className="flex items-center gap-3">
+            <span className="text-xl font-bold text-gradient-static">
               {price.toFixed(2)} ج.م
             </span>
             {originalPrice && (
