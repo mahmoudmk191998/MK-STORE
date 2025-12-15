@@ -1,0 +1,4 @@
+project_id = "lvjdtfkloclvbggrzrnq"
+
+[functions.send-order-confirmation]
+verify_jwt = false
