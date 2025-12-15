@@ -8,11 +8,16 @@ import {
   MessageSquare, 
   Truck, 
   ArrowRight,
-  LogOut
+  LogOut,
+  X
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/contexts/AuthContext';
 import { cn } from '@/lib/utils';
+
+interface AdminSidebarProps {
+  onClose?: () => void;
+}
 
 const menuItems = [
   { icon: LayoutDashboard, label: 'الرئيسية', href: '/admin' },
@@ -23,7 +28,7 @@ const menuItems = [
   { icon: Truck, label: 'الشحن', href: '/admin/shipping' },
 ];
 
-const AdminSidebar: React.FC = () => {
+const AdminSidebar: React.FC<AdminSidebarProps> = ({ onClose }) => {
   const location = useLocation();
   const { signOut } = useAuth();
 
@@ -37,12 +42,22 @@ const AdminSidebar: React.FC = () => {
   return (
     <aside className="w-64 bg-card border-l border-border min-h-screen sticky top-0 flex flex-col">
       {/* Logo */}
-      <div className="p-6 border-b border-border">
-        <Link to="/admin" className="flex items-center gap-2">
+      <div className="p-6 border-b border-border flex items-center justify-between">
+        <Link to="/admin" className="flex items-center gap-2" onClick={onClose}>
           <span className="text-xl font-display font-bold">
             MK<span className="text-accent">.</span>ADMIN
           </span>
         </Link>
+        {onClose && (
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden"
+            onClick={onClose}
+          >
+            <X className="h-5 w-5" />
+          </Button>
+        )}
       </div>
 
       {/* Navigation */}
@@ -51,6 +66,7 @@ const AdminSidebar: React.FC = () => {
           <Link
             key={item.href}
             to={item.href}
+            onClick={onClose}
             className={cn(
               'flex items-center gap-3 px-4 py-3 rounded-lg transition-colors',
               isActive(item.href)
@@ -67,7 +83,7 @@ const AdminSidebar: React.FC = () => {
       {/* Footer */}
       <div className="p-4 border-t border-border space-y-2">
         <Button variant="outline" className="w-full justify-start" asChild>
-          <Link to="/">
+          <Link to="/" onClick={onClose}>
             <ArrowRight className="h-4 w-4 ml-2" />
             العودة للمتجر
           </Link>
