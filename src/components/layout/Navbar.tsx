@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingBag, User, Menu, X, Search } from 'lucide-react';
+import { ShoppingBag, User, Menu, X, Search, Server } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContext';
+import { useAdmin } from '@/hooks/useAdmin';
 import ThemeToggle from '@/components/ThemeToggle';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { totalItems } = useCart();
   const { user } = useAuth();
+  const { isAdmin } = useAdmin();
   const navigate = useNavigate();
 
   const navLinks = [
@@ -50,6 +52,18 @@ const Navbar: React.FC = () => {
             <Button variant="ghost" size="icon" className="hidden lg:flex">
               <Search className="h-5 w-5" />
             </Button>
+
+            {isAdmin && (
+              <Button 
+                variant="ghost" 
+                size="icon"
+                onClick={() => navigate('/admin')}
+                className="hidden lg:flex"
+                title="لوحة الإدارة"
+              >
+                <Server className="h-5 w-5" />
+              </Button>
+            )}
             
             <Button 
               variant="ghost" 
@@ -99,6 +113,15 @@ const Navbar: React.FC = () => {
                   {link.name}
                 </Link>
               ))}
+              {isAdmin && (
+                <Link
+                  to="/admin"
+                  className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  لوحة الإدارة
+                </Link>
+              )}
             </div>
           </div>
         )}
